@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>City Hub - Your Community for Urban Issues</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo">
+          <h1>Com<span>Tok</span></h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="explore.html">Explore</a></li>
+            <li><a href="trending.html">Trending</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </nav>
+        <div class="user-actions">
+          <button class="btn btn-secondary">Log In</button>
+          <button class="btn btn-primary">Sign Up</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container">
+        <h2>Connect with Your City</h2>
+        <p>
+          Discuss local issues, stay informed, and make a difference in your
+          community
+        </p>
+        <div class="search-box">
+          <input type="text" placeholder="Search for a city or topic..." />
+          <button><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="location-navigator">
+      <div class="container">
+        <div class="breadcrumb">
+          <span>Browse by Location:</span>
+          <select id="continent-select" class="location-select">
+            <option value="">Select Continent</option>
+            <option value="asia">Asia</option>
+            <option value="africa">Africa</option>
+            <option value="europe">Europe</option>
+            <option value="north-america">North America</option>
+            <option value="south-america">South America</option>
+            <option value="australia">Australia</option>
+          </select>
+          <select id="country-select" class="location-select" disabled>
+            <option value="">Select Country</option>
+          </select>
+          <select id="region-select" class="location-select" disabled>
+            <option value="">Select Region</option>
+          </select>
+          <select id="city-select" class="location-select" disabled>
+            <option value="">Select City</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="trending-issues">
+      <div class="container">
+        <h3>Trending Issues</h3>
+        <div class="issues-grid">
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="location">Taguig City, Philippines</span>
+              <span class="category traffic">Traffic</span>
+            </div>
+            <h4>Major Traffic Jam on C5 Road</h4>
+            <p>
+              Ongoing construction is causing severe delays during rush hour...
+            </p>
+            <div class="issue-footer">
+              <span class="timestamp">2 hours ago</span>
+              <div class="stats">
+                <span><i class="fas fa-comment"></i> 24</span>
+                <span><i class="fas fa-arrow-up"></i> 156</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="location">Metro Manila, Philippines</span>
+              <span class="category projects">Projects</span>
+            </div>
+            <h4>New Park Development in BGC</h4>
+            <p>
+              The city announced plans for a new public park in Bonifacio Global
+              City...
+            </p>
+            <div class="issue-footer">
+              <span class="timestamp">1 day ago</span>
+              <div class="stats">
+                <span><i class="fas fa-comment"></i> 87</span>
+                <span><i class="fas fa-arrow-up"></i> 342</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="location">Bangkok, Thailand</span>
+              <span class="category cleanliness">Cleanliness</span>
+            </div>
+            <h4>Community Cleanup Initiative</h4>
+            <p>
+              Local volunteers organized a successful canal cleanup event...
+            </p>
+            <div class="issue-footer">
+              <span class="timestamp">3 days ago</span>
+              <div class="stats">
+                <span><i class="fas fa-comment"></i> 42</span>
+                <span><i class="fas fa-arrow-up"></i> 219</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary view-more">View More</button>
+      </div>
+    </section>
+
+    <section class="categories">
+      <div class="container">
+        <h3>Browse by Category</h3>
+        <div class="category-grid">
+          <a
+            href="category.html?cat=cleanliness"
+            class="category-item cleanliness"
+          >
+            <i class="fas fa-broom"></i>
+            <h4>Cleanliness</h4>
+          </a>
+          <a href="category.html?cat=projects" class="category-item projects">
+            <i class="fas fa-building"></i>
+            <h4>Projects</h4>
+          </a>
+          <a
+            href="category.html?cat=road-closures"
+            class="category-item road-closed"
+          >
+            <i class="fas fa-road"></i>
+            <h4>Road Closures</h4>
+          </a>
+          <a
+            href="category.html?cat=construction"
+            class="category-item construction"
+          >
+            <i class="fas fa-hard-hat"></i>
+            <h4>Construction</h4>
+          </a>
+          <a href="category.html?cat=traffic" class="category-item traffic">
+            <i class="fas fa-car"></i>
+            <h4>Traffic</h4>
+          </a>
+          <a href="category.html?cat=events" class="category-item events">
+            <i class="fas fa-calendar-alt"></i>
+            <h4>Events</h4>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="join-community">
+      <div class="container">
+        <div class="join-content">
+          <h3>Join the Conversation</h3>
+          <p>
+            Create an account to post issues, comment, and connect with your
+            local community
+          </p>
+          <button class="btn btn-primary">Sign Up Now</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h4>City<span>Hub</span></h4>
+            <p>Connecting communities to improve urban living.</p>
+          </div>
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="explore.html">Explore</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Popular Regions</h4>
+            <ul>
+              <li><a href="region.html?id=metro-manila">Metro Manila</a></li>
+              <li>
+                <a href="region.html?id=bangkok-metropolitan"
+                  >Bangkok Metropolitan</a
+                >
+              </li>
+              <li><a href="region.html?id=greater-tokyo">Greater Tokyo</a></li>
+              <li><a href="region.html?id=nyc-metro">NYC Metro Area</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 CityHub. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

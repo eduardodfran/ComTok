@@ -1,0 +1,495 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #2d6da3;
+}
+
+ul {
+    list-style: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #2d6da3;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #215a8c;
+}
+
+.btn-secondary {
+    background-color: #f8f9fa;
+    color: #2d6da3;
+    border: 1px solid #2d6da3;
+}
+
+.btn-secondary:hover {
+    background-color: #e9ecef;
+}
+
+/* Header Styles */
+header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.logo span {
+    color: #2d6da3;
+}
+
+nav ul {
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 25px;
+}
+
+nav ul li a {
+    color: #555;
+    font-weight: 500;
+    padding: 5px;
+}
+
+nav ul li a:hover {
+    color: #2d6da3;
+}
+
+.user-actions button {
+    margin-left: 10px;
+}
+
+/* Hero Section */
+.hero {
+    background-image: linear-gradient(rgba(45, 109, 163, 0.8), rgba(45, 109, 163, 0.8)), 
+                      url('https://source.unsplash.com/1600x900/?cityscape');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h2 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.search-box {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+}
+
+.search-box button {
+    padding: 15px 20px;
+    background-color: #215a8c;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+/* Location Navigator */
+.location-navigator {
+    background-color: white;
+    padding: 20px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.breadcrumb span {
+    font-weight: 600;
+    color: #555;
+}
+
+.location-select {
+    padding: 8px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+    color: #495057;
+}
+
+/* Trending Issues Section */
+.trending-issues {
+    padding: 60px 0;
+}
+
+.trending-issues h3 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.issues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.issue-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+}
+
+.issue-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.issue-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.location {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.category {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.traffic {
+    background-color: #ffeaea;
+    color: #dc3545;
+}
+
+.cleanliness {
+    background-color: #e6f7ff;
+    color: #0d6efd;
+}
+
+.projects {
+    background-color: #e6ffe6;
+    color: #198754;
+}
+
+.road-closed {
+    background-color: #fff3cd;
+    color: #ffc107;
+}
+
+.construction {
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
+
+.events {
+    background-color: #f5e6ff;
+    color: #6f42c1;
+}
+
+.issue-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.issue-card p {
+    color: #6c757d;
+    margin-bottom: 15px;
+}
+
+.issue-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.stats {
+    display: flex;
+    gap: 15px;
+}
+
+.view-more {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Categories Section */
+.categories {
+    background-color: white;
+    padding: 60px 0;
+}
+
+.categories h3 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.category-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-item i {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.category-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.category-item.cleanliness {
+    background-color: #e6f7ff;
+    color: #0d6efd;
+}
+
+.category-item.projects {
+    background-color: #e6ffe6;
+    color: #198754;
+}
+
+.category-item.road-closed {
+    background-color: #fff3cd;
+    color: #ffc107;
+}
+
+.category-item.construction {
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
+
+.category-item.traffic {
+    background-color: #ffeaea;
+    color: #dc3545;
+}
+
+.category-item.events {
+    background-color: #f5e6ff;
+    color: #6f42c1;
+}
+
+/* Join Community Section */
+.join-community {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                     url('https://source.unsplash.com/1600x900/?community');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.join-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.join-content h3 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.join-content p {
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+/* Footer */
+footer {
+    background-color: #2d3748;
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-section h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.footer-section h4 span {
+    color: #63b3ed;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 40px;
+    height: 2px;
+    background-color: #63b3ed;
+}
+
+.footer-section p {
+    color: #cbd5e0;
+    margin-bottom: 20px;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #cbd5e0;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #4a5568;
+    color: white;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: #63b3ed;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #4a5568;
+    color: #cbd5e0;
+    font-size: 14px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    nav ul {
+        margin: 15px 0;
+    }
+    
+    .hero h2 {
+        font-size: 32px;
+    }
+    
+    .issues-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .breadcrumb {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .location-select {
+        width: 100%;
+    }
+}
