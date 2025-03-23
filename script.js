@@ -1,167 +1,364 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Location navigation selectors
-    const continentSelect = document.getElementById('continent-select');
-    const countrySelect = document.getElementById('country-select');
-    const regionSelect = document.getElementById('region-select');
-    const citySelect = document.getElementById('city-select');
+document.addEventListener('DOMContentLoaded', function () {
+  // Location navigation selectors
+  const regionSelect = document.getElementById('region-select')
+  const provinceSelect = document.getElementById('province-select')
+  const citySelect = document.getElementById('city-select')
+  const barangaySelect = document.getElementById('barangay-select')
 
-    // Sample location data (in a real app, this would come from an API)
-    const locationData = {
-        asia: {
-            philippines: {
-                'metro-manila': ['Taguig City', 'Makati City', 'Manila City', 'Quezon City', 'Pasig City'],
-                'central-luzon': ['Angeles City', 'San Fernando', 'Olongapo City'],
-                'calabarzon': ['Calamba City', 'Batangas City', 'Tagaytay City']
+  // Sample location data for Philippines (in a real app, this would come from an API)
+  const philippinesData = {
+    ncr: {
+      name: 'National Capital Region',
+      provinces: {
+        'metro-manila': {
+          name: 'Metro Manila',
+          cities: {
+            manila: {
+              name: 'Manila City',
+              barangays: [
+                'Binondo',
+                'Ermita',
+                'Intramuros',
+                'Malate',
+                'Quiapo',
+                'Sampaloc',
+                'San Nicolas',
+                'Santa Cruz',
+                'Tondo',
+              ],
             },
-            thailand: {
-                'bangkok-metropolitan': ['Bangkok', 'Nonthaburi', 'Pathum Thani'],
-                'northern-thailand': ['Chiang Mai', 'Chiang Rai', 'Lampang']
+            'quezon-city': {
+              name: 'Quezon City',
+              barangays: [
+                'Bagong Silangan',
+                'Batasan Hills',
+                'Commonwealth',
+                'Fairview',
+                'Kamuning',
+                'Lagro',
+                'Novaliches',
+                'Project 6',
+                'Santa Lucia',
+              ],
             },
-            japan: {
-                'greater-tokyo': ['Tokyo', 'Yokohama', 'Kawasaki', 'Saitama'],
-                'kansai': ['Osaka', 'Kyoto', 'Kobe']
-            }
+            makati: {
+              name: 'Makati City',
+              barangays: [
+                'Ayala North',
+                'Bel-Air',
+                'Dasmarinas',
+                'Magallanes',
+                'Poblacion',
+                'San Lorenzo',
+                'Urdaneta',
+                'Valenzuela',
+              ],
+            },
+            taguig: {
+              name: 'Taguig City',
+              barangays: [
+                'Fort Bonifacio',
+                'McKinley Hill',
+                'Ususan',
+                'Western Bicutan',
+                'Upper Bicutan',
+                'Pinagsama',
+                'Bagumbayan',
+                'Ligid-Tipas',
+              ],
+            },
+            pasig: {
+              name: 'Pasig City',
+              barangays: [
+                'Kapitolyo',
+                'Manggahan',
+                'Maybunga',
+                'Oranbo',
+                'San Antonio',
+                'Ugong',
+                'Rosario',
+                'Santolan',
+              ],
+            },
+          },
         },
-        europe: {
-            'united-kingdom': {
-                'greater-london': ['London', 'Croydon', 'Barnet', 'Bromley'],
-                'west-midlands': ['Birmingham', 'Coventry', 'Wolverhampton']
+      },
+    },
+    region3: {
+      name: 'Central Luzon',
+      provinces: {
+        bulacan: {
+          name: 'Bulacan',
+          cities: {
+            malolos: {
+              name: 'Malolos City',
+              barangays: [
+                'Balite',
+                'Bulihan',
+                'Caniogan',
+                'Guinhawa',
+                'Longos',
+                'Mojon',
+                'Panasahan',
+                'Santisima Trinidad',
+              ],
             },
-            france: {
-                'ile-de-france': ['Paris', 'Versailles', 'Saint-Denis'],
-                'provence': ['Marseille', 'Aix-en-Provence', 'Avignon']
-            }
+            meycauayan: {
+              name: 'Meycauayan City',
+              barangays: [
+                'Bahay Pare',
+                'Calvario',
+                'Hulo',
+                'Langka',
+                'Malhacan',
+                'Perez',
+                'Saluysoy',
+                'Tugatog',
+              ],
+            },
+          },
         },
-        'north-america': {
-            'united-states': {
-                'new-york-state': ['New York City', 'Buffalo', 'Rochester'],
-                california: ['Los Angeles', 'San Francisco', 'San Diego'],
-                texas: ['Houston', 'Dallas', 'Austin']
+        pampanga: {
+          name: 'Pampanga',
+          cities: {
+            angeles: {
+              name: 'Angeles City',
+              barangays: [
+                'Balibago',
+                'Cutcut',
+                'Lourdes Sur',
+                'Margot',
+                'Pulung Maragul',
+                'Santo Rosario',
+                'Tabun',
+              ],
             },
-            canada: {
-                ontario: ['Toronto', 'Ottawa', 'Hamilton'],
-                quebec: ['Montreal', 'Quebec City', 'Laval']
-            }
-        }
-    };
+            'san-fernando': {
+              name: 'San Fernando City',
+              barangays: [
+                'Calulut',
+                'Del Carmen',
+                'Juliana',
+                'Panipuan',
+                'San Isidro',
+                'Santo Niño',
+                'Telabastagan',
+              ],
+            },
+          },
+        },
+      },
+    },
+    region7: {
+      name: 'Central Visayas',
+      provinces: {
+        cebu: {
+          name: 'Cebu',
+          cities: {
+            'cebu-city': {
+              name: 'Cebu City',
+              barangays: [
+                'Apas',
+                'Banilad',
+                'Capitol Site',
+                'Guadalupe',
+                'Lahug',
+                'Mabolo',
+                'Punta Princesa',
+                'Talamban',
+              ],
+            },
+            mandaue: {
+              name: 'Mandaue City',
+              barangays: [
+                'Alang-Alang',
+                'Bakilid',
+                'Cambaro',
+                'Guizo',
+                'Ibabao',
+                'Looc',
+                'Mantuyong',
+                'Subangdaku',
+                'Tipolo',
+              ],
+            },
+          },
+        },
+        bohol: {
+          name: 'Bohol',
+          cities: {
+            tagbilaran: {
+              name: 'Tagbilaran City',
+              barangays: [
+                'Bool',
+                'Cogon',
+                'Dao',
+                'Mansasa',
+                'Poblacion',
+                'San Isidro',
+                'Taloto',
+                'Ubujan',
+              ],
+            },
+          },
+        },
+      },
+    },
+  }
 
-    // Event listeners for the location selectors
-    continentSelect.addEventListener('change', function() {
-        resetSelect(countrySelect);
-        resetSelect(regionSelect);
-        resetSelect(citySelect);
-        
-        const selectedContinent = this.value;
-        
-        if (selectedContinent) {
-            // Enable the country select and populate it
-            countrySelect.disabled = false;
-            const countries = Object.keys(locationData[selectedContinent]);
-            
-            populateSelect(countrySelect, countries);
-        } else {
-            countrySelect.disabled = true;
-            regionSelect.disabled = true;
-            citySelect.disabled = true;
-        }
-    });
+  // Event listeners for the location selectors
+  regionSelect.addEventListener('change', function () {
+    resetSelect(provinceSelect)
+    resetSelect(citySelect)
+    resetSelect(barangaySelect)
 
-    countrySelect.addEventListener('change', function() {
-        resetSelect(regionSelect);
-        resetSelect(citySelect);
-        
-        const selectedContinent = continentSelect.value;
-        const selectedCountry = this.value;
-        
-        if (selectedCountry) {
-            // Enable the region select and populate it
-            regionSelect.disabled = false;
-            const regions = Object.keys(locationData[selectedContinent][selectedCountry]);
-            
-            populateSelect(regionSelect, regions);
-        } else {
-            regionSelect.disabled = true;
-            citySelect.disabled = true;
-        }
-    });
+    const selectedRegion = this.value
 
-    regionSelect.addEventListener('change', function() {
-        resetSelect(citySelect);
-        
-        const selectedContinent = continentSelect.value;
-        const selectedCountry = countrySelect.value;
-        const selectedRegion = this.value;
-        
-        if (selectedRegion) {
-            // Enable the city select and populate it
-            citySelect.disabled = false;
-            const cities = locationData[selectedContinent][selectedCountry][selectedRegion];
-            
-            populateSelect(citySelect, cities, false);
-        } else {
-            citySelect.disabled = true;
-        }
-    });
+    if (selectedRegion && philippinesData[selectedRegion]) {
+      // Enable the province select and populate it
+      provinceSelect.disabled = false
 
-    citySelect.addEventListener('change', function() {
-        const selectedCity = this.value;
-        
-        if (selectedCity) {
-            // In a real app, this would navigate to the city page
-            console.log('Navigate to city: ' + selectedCity);
-        }
-    });
-
-    // Helper function to reset a select element
-    function resetSelect(selectElement) {
-        selectElement.innerHTML = '';
-        const defaultOption = document.createElement('option');
-        defaultOption.value = '';
-        defaultOption.textContent = `Select ${selectElement.id.split('-')[0].charAt(0).toUpperCase() + selectElement.id.split('-')[0].slice(1)}`;
-        selectElement.appendChild(defaultOption);
+      // Get provinces from the selected region
+      const provinces = philippinesData[selectedRegion].provinces
+      populateSelect(provinceSelect, provinces)
+    } else {
+      provinceSelect.disabled = true
+      citySelect.disabled = true
+      barangaySelect.disabled = true
     }
+  })
 
-    // Helper function to populate a select element
-    function populateSelect(selectElement, options, formatOption = true) {
-        options.forEach(option => {
-            const optionElement = document.createElement('option');
-            optionElement.value = formatOption ? formatValue(option) : option;
-            optionElement.textContent = formatOption ? formatDisplay(option) : option;
-            selectElement.appendChild(optionElement);
-        });
+  provinceSelect.addEventListener('change', function () {
+    resetSelect(citySelect)
+    resetSelect(barangaySelect)
+
+    const selectedRegion = regionSelect.value
+    const selectedProvince = this.value
+
+    if (
+      selectedProvince &&
+      philippinesData[selectedRegion]?.provinces[selectedProvince]
+    ) {
+      // Enable the city select and populate it
+      citySelect.disabled = false
+
+      // Get cities from the selected province
+      const cities =
+        philippinesData[selectedRegion].provinces[selectedProvince].cities
+      populateSelect(citySelect, cities)
+    } else {
+      citySelect.disabled = true
+      barangaySelect.disabled = true
     }
+  })
 
-    // Format value for select options (convert spaces to dashes and lowercase)
-    function formatValue(str) {
-        return str.toLowerCase().replace(/\s+/g, '-');
+  citySelect.addEventListener('change', function () {
+    resetSelect(barangaySelect)
+
+    const selectedRegion = regionSelect.value
+    const selectedProvince = provinceSelect.value
+    const selectedCity = this.value
+
+    if (
+      selectedCity &&
+      philippinesData[selectedRegion]?.provinces[selectedProvince]?.cities[
+        selectedCity
+      ]
+    ) {
+      // Enable the barangay select and populate it
+      barangaySelect.disabled = false
+
+      // Get barangays from the selected city
+      const barangays =
+        philippinesData[selectedRegion].provinces[selectedProvince].cities[
+          selectedCity
+        ].barangays
+      populateSelectSimple(barangaySelect, barangays)
+    } else {
+      barangaySelect.disabled = true
     }
+  })
 
-    // Format display text for select options (capitalize words and replace dashes with spaces)
-    function formatDisplay(str) {
-        return str.split('-')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    }
+  // Helper function to reset a select element
+  function resetSelect(selectElement) {
+    selectElement.innerHTML = ''
+    const defaultOption = document.createElement('option')
+    defaultOption.value = ''
+    defaultOption.textContent = `Select ${
+      selectElement.id.split('-')[0].charAt(0).toUpperCase() +
+      selectElement.id.split('-')[0].slice(1)
+    }`
+    selectElement.appendChild(defaultOption)
+  }
 
-    // Toggle mobile navigation
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navMenu = document.querySelector('nav ul');
+  // Helper function to populate a select element with simple array
+  function populateSelectSimple(selectElement, options) {
+    options.forEach((option) => {
+      const optionElement = document.createElement('option')
+      optionElement.value = formatValue(option)
+      optionElement.textContent = option
+      selectElement.appendChild(optionElement)
+    })
+  }
 
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('show');
-        });
-    }
+  // Helper function to populate a select element with object data
+  function populateSelect(selectElement, options) {
+    Object.keys(options).forEach((key) => {
+      const optionElement = document.createElement('option')
+      optionElement.value = key
+      optionElement.textContent = options[key].name
+      selectElement.appendChild(optionElement)
+    })
+  }
 
-    // Initialize trending issue posts with like and comment functionality
-    const issueCards = document.querySelectorAll('.issue-card');
-    
-    issueCards.forEach(card => {
-        // In a real app, you'd have event listeners for like/comment buttons
-        card.addEventListener('click', function() {
-            // Navigate to the issue detail page
-            const issueTitle = this.querySelector('h4').textContent;
-            console.log('Navigate to issue: ' + issueTitle);
-        });
-    });
-});
+  // Format value for select options (convert spaces to dashes and lowercase)
+  function formatValue(str) {
+    return str.toLowerCase().replace(/\s+/g, '-')
+  }
+
+  // Initialize community cards
+  const communityCards = document.querySelectorAll('.community-card')
+  communityCards.forEach((card) => {
+    card.querySelector('.btn').addEventListener('click', function (e) {
+      e.preventDefault()
+      const communityName = card.querySelector('h4').textContent
+      alert(`You've joined the ${communityName} community!`)
+    })
+  })
+
+  // Initialize issue cards
+  const issueCards = document.querySelectorAll('.issue-card')
+  issueCards.forEach((card) => {
+    card.addEventListener('click', function () {
+      const issueTitle = this.querySelector('h4').textContent
+      const location = this.querySelector('.location').textContent
+      window.location.href = `issue-details.html?title=${encodeURIComponent(
+        issueTitle
+      )}&location=${encodeURIComponent(location)}`
+    })
+  })
+
+  // Community creation button
+  const createCommunityBtn = document.querySelector('.create-community .btn')
+  if (createCommunityBtn) {
+    createCommunityBtn.addEventListener('click', function () {
+      window.location.href = 'create-community.html'
+    })
+  }
+
+  // Sign up button in hero and join section
+  const signupButtons = document.querySelectorAll('.btn-primary.btn-large')
+  signupButtons.forEach((button) => {
+    button.addEventListener('click', function () {
+      window.location.href = 'signup.html'
+    })
+  })
+
+  // Explore communities button
+  const exploreCommunities = document.querySelector('.hero-cta .btn-secondary')
+  if (exploreCommunities) {
+    exploreCommunities.addEventListener('click', function () {
+      window.location.href = 'explore.html'
+    })
+  }
+})
