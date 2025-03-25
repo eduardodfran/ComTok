@@ -130,3 +130,69 @@ Navigation: Easy access to provinces, cities, and user profiles.
 Post Creation Page: Simple and intuitive UI for posting content.
 
 Profile Page: Shows user information, posts, and saved content.
+
+# Required Dependencies for ComTok
+
+This document outlines all the essential dependencies required to run the ComTok application successfully.
+
+## Core Dependencies
+
+### Frontend (React Native/Expo)
+
+| Package                                     | Version  | Purpose                                       |
+| ------------------------------------------- | -------- | --------------------------------------------- |
+| `expo`                                      | ^52.0.40 | Core Expo framework                           |
+| `react`                                     | 18.3.1   | Core React library                            |
+| `react-native`                              | 0.76.7   | React Native framework                        |
+| `expo-router`                               | ~4.0.19  | File-based routing for Expo apps              |
+| `expo-secure-store`                         | ~14.0.1  | Secure storage for authentication tokens      |
+| `expo-local-authentication`                 | ~15.0.2  | Biometric authentication (Face ID / Touch ID) |
+| `@react-native-async-storage/async-storage` | 1.23.1   | Persistent storage solution                   |
+| `axios`                                     | ^1.8.4   | API requests and data fetching                |
+
+### Backend (Node.js/Express)
+
+| Package        | Version | Purpose                         |
+| -------------- | ------- | ------------------------------- |
+| `express`      | ^4.21.2 | Web server framework            |
+| `sequelize`    | ^6.37.6 | ORM for database interactions   |
+| `mysql2`       | ^3.14.0 | MySQL database driver           |
+| `jsonwebtoken` | ^9.0.2  | JWT authentication              |
+| `bcryptjs`     | ^3.0.2  | Password hashing                |
+| `cors`         | ^2.8.5  | Cross-origin resource sharing   |
+| `dotenv`       | ^16.4.7 | Environment variable management |
+
+## Installation
+
+To ensure you have all required dependencies installed, run:
+
+```bash
+npm run setup
+```
+
+This will install both frontend and backend dependencies.
+
+## Troubleshooting Missing Dependencies
+
+If you encounter module resolution errors:
+
+1. For frontend packages:
+
+   ```bash
+   npm run install-packages
+   ```
+
+2. For backend packages:
+
+   ```bash
+   npm run install-backend
+   ```
+
+3. If specific packages are still missing, install them manually:
+   ```bash
+   npm install package-name
+   ```
+
+## Environment Setup
+
+Make sure to set up your environment variables in a `.env` file:

@@ -1,8 +1,59 @@
-# Welcome to your Expo app 👋
+# ComTok
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+ComTok is a community-focused social platform for Filipinos to connect and share information about their local provinces and cities. Think of it as a Reddit-style application but focused on geographic locations throughout the Philippines.
 
-## Get started
+![ComTok Banner](https://images.unsplash.com/photo-1529686342540-1b43aec0df75?q=80&w=1000)
+
+## 📱 Features
+
+- **Location-based Communities**: Browse and participate in discussions organized by provinces and cities
+- **User Authentication**: Secure login with email/password, biometric support, and OTP verification
+- **Content Creation**: Create posts about specific locations with rich media support
+- **Interactive Comments**: Engage in threaded discussions with voting systems
+- **Follow System**: Follow locations or users to customize your feed
+- **Notifications**: Stay updated on interactions with your content
+- **User Profiles**: Personalized profiles showing activity and contributions
+- **Responsive Design**: Works seamlessly on mobile and web interfaces
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v14.x or higher)
+- MySQL (v8.0 or higher)
+- Expo CLI (for mobile development)
+
+### First-time Setup
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/your-username/comtok.git
+   cd comtok
+   ```
+
+2. Run the setup script
+
+   ```bash
+   npm run setup
+   ```
+
+   This script will install all dependencies and prepare your development environment.
+
+3. Configure your database
+
+   - Create a database named `comtok_db`
+   - Update `.env` file with your database credentials
+
+4. Start the development servers
+   ```bash
+   npm start
+   ```
+   This will start both the backend server and the Expo development server.
+
+### Alternative Setup
+
+If you prefer to set things up manually:
 
 1. Install dependencies
 
@@ -10,41 +61,21 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. Start the app
+2. Install required Expo packages
 
    ```bash
-    npx expo start
+   npm run install-packages
    ```
 
-In the output, you'll find options to open the app in a
+3. Install backend packages
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   ```bash
+   npm run install-backend
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+4. Start the development environment
+   ```bash
+   npm start
+   ```
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🏗️ Project Structure
