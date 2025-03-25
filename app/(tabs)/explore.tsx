@@ -1,109 +1,277 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Platform,
+  TextInput,
+  View,
+} from 'react-native'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'expo-router'
+import { Ionicons } from '@expo/vector-icons'
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+import { ThemedText } from '@/components/ThemedText'
+import { ThemedView } from '@/components/ThemedView'
+import { provinces } from '@/services/mockData'
+import { formatNumber } from '@/utils/formatters'
+import { Province } from '@/types/location'
+import { useThemeColor } from '@/hooks/useThemeColor'
+import { getThemedShadow } from '@/utils/theme'
 
-export default function TabTwoScreen() {
+export default function ExploreScreen() {
+  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState('')
+  const [isFocused, setIsFocused] = useState(false)
+  const [filteredProvinces, setFilteredProvinces] =
+    useState<Province[]>(provinces)
+
+  // Get theme colors
+  const iconColor = useThemeColor({}, 'icon')
+  const inputBgColor = useThemeColor({}, 'inputBackground')
+  const textColor = useThemeColor({}, 'text')
+  const borderColor = useThemeColor({}, 'border')
+  const tintColor = useThemeColor({}, 'tint')
+  const cardBgColor = useThemeColor({}, 'cardBackground')
+  const secondaryTextColor = useThemeColor({}, 'secondaryText')
+  const shadowColor = useThemeColor({}, 'shadow')
+  const shadow = getThemedShadow(1)
+
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredProvinces(provinces)
+      return
+    }
+
+    const lowercaseQuery = searchQuery.toLowerCase()
+    const filtered = provinces.filter(
+      (province) =>
+        province.name.toLowerCase().includes(lowercaseQuery) ||
+        province.description.toLowerCase().includes(lowercaseQuery)
+    )
+
+    setFilteredProvinces(filtered)
+  }, [searchQuery])
+
+  const navigateToProvince = (provinceId: number, provinceName: string) => {
+    router.push({
+      pathname: '/province/[id]',
+      params: { id: provinceId, name: provinceName },
+    })
+  }
+
+  const clearSearch = () => {
+    setSearchQuery('')
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-      headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
-          style={styles.headerImage}
+    <ThemedView style={styles.container}>
+      {/* Search bar */}
+      <ThemedView
+        style={[
+          styles.searchContainer,
+          {
+            backgroundColor: inputBgColor,
+            borderColor: isFocused ? tintColor : 'transparent',
+          },
+          isFocused && styles.searchContainerFocused,
+        ]}
+      >
+        <Ionicons
+          name="search"
+          size={20}
+          color={iconColor}
+          style={styles.searchIcon}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
+        <TextInput
+          style={[styles.searchInput, { color: textColor }]}
+          placeholder="Search provinces and cities..."
+          placeholderTextColor={secondaryTextColor}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          returnKeyType="search"
+          clearButtonMode="while-editing"
+        />
+        {searchQuery.length > 0 && (
+          <TouchableOpacity onPress={clearSearch}>
+            <Ionicons name="close-circle" size={20} color={iconColor} />
+          </TouchableOpacity>
+        )}
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
+
+      {filteredProvinces.length === 0 ? (
+        <ThemedView style={styles.emptyResultsContainer}>
+          <Ionicons name="search-outline" size={64} color={iconColor} />
+          <ThemedText style={styles.emptyResultsText}>
+            No results found for "{searchQuery}"
           </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
-    </ParallaxScrollView>
-  );
+          <ThemedText
+            style={[styles.emptyResultsSubtext, { color: secondaryTextColor }]}
+          >
+            Try using different keywords or check for typos
+          </ThemedText>
+        </ThemedView>
+      ) : (
+        <>
+          <ThemedText type="subtitle" style={styles.sectionTitle}>
+            {searchQuery ? 'Search Results' : 'Provinces'}
+          </ThemedText>
+
+          <FlatList
+            data={filteredProvinces}
+            keyExtractor={(item) => item.id.toString()}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.provinceList}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={[
+                  styles.provinceCard,
+                  { backgroundColor: cardBgColor, ...shadow },
+                ]}
+                onPress={() => navigateToProvince(item.id, item.name)}
+                activeOpacity={0.7}
+              >
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.provinceImage}
+                />
+                <ThemedView style={styles.provinceInfo}>
+                  <ThemedText
+                    type="defaultSemiBold"
+                    style={styles.provinceName}
+                  >
+                    {item.name}
+                  </ThemedText>
+                  <ThemedText
+                    style={[
+                      styles.provinceDescription,
+                      { color: secondaryTextColor },
+                    ]}
+                    numberOfLines={2}
+                  >
+                    {item.description}
+                  </ThemedText>
+                  <ThemedView style={styles.statsContainer}>
+                    <ThemedView style={styles.stat}>
+                      <Ionicons
+                        name="people-outline"
+                        size={16}
+                        color={iconColor}
+                      />
+                      <ThemedText
+                        style={[styles.statText, { color: secondaryTextColor }]}
+                      >
+                        {formatNumber(item.memberCount)} members
+                      </ThemedText>
+                    </ThemedView>
+                    <ThemedView style={styles.stat}>
+                      <Ionicons
+                        name="document-text-outline"
+                        size={16}
+                        color={iconColor}
+                      />
+                      <ThemedText
+                        style={[styles.statText, { color: secondaryTextColor }]}
+                      >
+                        {formatNumber(item.postCount)} posts
+                      </ThemedText>
+                    </ThemedView>
+                  </ThemedView>
+                </ThemedView>
+              </TouchableOpacity>
+            )}
+          />
+        </>
+      )}
+    </ThemedView>
+  )
 }
 
 const styles = StyleSheet.create({
-  headerImage: {
-    color: '#808080',
-    bottom: -90,
-    left: -35,
-    position: 'absolute',
+  container: {
+    flex: 1,
+    paddingTop: 16, // Reduced top padding since we have header now
   },
-  titleContainer: {
+  searchContainer: {
     flexDirection: 'row',
-    gap: 8,
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginTop: 16,
+    marginBottom: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 8,
+    borderWidth: 1,
   },
-});
+  searchContainerFocused: {
+    backgroundColor: '#FFFFFF',
+  },
+  searchIcon: {
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    paddingVertical: 4,
+  },
+  sectionTitle: {
+    marginHorizontal: 20,
+    marginBottom: 12,
+  },
+  provinceList: {
+    paddingHorizontal: 20,
+    paddingBottom: 120,
+  },
+  provinceCard: {
+    marginBottom: 16,
+    borderRadius: 12,
+    overflow: 'hidden',
+  },
+  provinceImage: {
+    height: 140,
+    width: '100%',
+  },
+  provinceInfo: {
+    padding: 16,
+  },
+  provinceName: {
+    fontSize: 18,
+    marginBottom: 4,
+  },
+  provinceDescription: {
+    fontSize: 14,
+    marginBottom: 12,
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    marginTop: 4,
+  },
+  stat: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  statText: {
+    fontSize: 12,
+    marginLeft: 4,
+  },
+  emptyResultsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 40,
+  },
+  emptyResultsText: {
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  emptyResultsSubtext: {
+    fontSize: 14,
+    textAlign: 'center',
+  },
+})
